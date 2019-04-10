@@ -1,3 +1,32 @@
+var currentUserScore = 0;
+var currentComputerScore = 0;
+
+function refreshScore(winner){
+    var userText = document.querySelector('.user-side');
+    var computerText = document.querySelector('.computer-side');
+    if(winner == "start"){
+        document.querySelector('.user-score').textContent = currentUserScore;
+        document.querySelector('.computer-score').textContent = currentComputerScore;
+    } else if (winner == "user"){
+        currentUserScore++;
+        document.querySelector('.user-score').textContent = currentUserScore;
+        userText.classList.add('winning-animation');
+        
+    } else if(winner == "computer"){
+        currentComputerScore++;
+        document.querySelector('.computer-score').textContent = currentComputerScore;
+        computerText.classList.add('winning-animation');
+        
+        
+    }
+
+    if(currentComputerScore == 5) {
+        alert('You lost! The computer got to 5 before you.');
+    } else if(currentUserScore == 5) {
+        alert('You won! You got to 5 before the computer!')
+    }
+}
+
 const buttonCol = document.querySelectorAll('input');
 
 buttonCol.forEach((input) => {
@@ -9,11 +38,11 @@ buttonCol.forEach((input) => {
 
 function checkButton(classList){
     if(classList.contains("button1")){
-        console.log(singleRound("ROCK", computerPlay()));
+        whoWon("rock");
     } else if (classList.contains("button2")){
-        console.log(singleRound("PAPER", computerPlay()));
+        whoWon("paper")
     } else if (classList.contains("button3")){
-        console.log(singleRound("SCISSORS", computerPlay()));
+        whoWon("scissors");
     }
 }
 
@@ -28,6 +57,17 @@ function computerPlay(){
             return "SCISSORS";
     }
 }
+
+function whoWon(userChoice){
+    
+    if(singleRound(userChoice, computerPlay()).includes("win")){
+        refreshScore("user");
+    } else if(singleRound(userChoice, computerPlay()).includes("win")){
+        refreshScore("computer");
+    }
+}
+
+
 function singleRound(playerSelection, computerSelection){
     let userStr = playerSelection.toUpperCase();
     switch(userStr){

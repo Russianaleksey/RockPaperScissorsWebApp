@@ -121,13 +121,16 @@ body {
     float: left;
     width:41%;
     max-height: 100%;
-
+    transition: all 1s ease;
+    border-style: none;
 }
 
 .computer-side {
     float: right;
     width:50%;
     max-height: 100%;
+    transition: all 1s ease;
+    border-style: none;
 }
 
 .user-name {
@@ -140,6 +143,7 @@ body {
     width: 50%;
     text-align: right;
     transform: translateX(-10%);
+
 
 }
 
@@ -157,3 +161,6 @@ body {
     transform: translateX(-25%);
 }
 
+.winning-animation {
+    color: #ffc600;
+}
